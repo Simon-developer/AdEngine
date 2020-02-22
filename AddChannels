@@ -1,0 +1,129 @@
+import mysql.connector
+my2 = mysql.connector.connect(host="localhost",
+                             user="root",
+                             passwd="192837465s",
+                            database="adengine")
+mycursor = my2.cursor()
+
+mycursor.execute('CREATE TABLE videos_ids (id INT PRIMARY KEY AUTO_INCREMENT, channel_id VARCHAR(70), '
+                 'video_id VARCHAR(100), add_date DATETIME)')
+my2.commit()
+
+mycursor.execute('CREATE TABLE channels ('
+        0         'id INT PRIMARY KEY AUTO_INCREMENT, '
+        1         'channelId VARCHAR(70), '
+        2        'title VARCHAR(100), '
+        3         'description MEDIUMTEXT, '
+        4         'rating INT, '
+        5         'relatedVkGroup VARCHAR(255), '
+        6         'relatedInstagramPage VARCHAR(255), '
+        7         'relatedPromotionPage VARCHAR(255), '
+        8         'relatedOther MEDIUMTEXT, '
+        9         'customUrl VARCHAR(120), '
+       10          'publishedAt DATETIME, '
+       11          'country VARCHAR(10), '
+       12          'logoUrl VARCHAR(255), '
+       13          'playlistLikes VARCHAR(255), '
+       14          'playlistUploads VARCHAR(255), '
+       15          'viewCount INT, '
+       16          'commentCount INT, '
+       17          'subscriberCount INT, '
+       18          'hiddenSubscriberCount BOOL, '
+       19          'videoCount INT, '
+       20          'privacyStatus ENUM("public", "private", "unlisted"), '
+       21          'showRelatedChannels BOOL, '
+       22          'bannerImage VARCHAR(255), '
+       23          'addDateTime DATETIME, '
+       24          'localisationStatus INT, '
+       25          'lastEditTime DATETIME'
+                 ')')
+
+mycursor.execute("CREATE TABLE channelstogo ("
+                     "id INT PRIMARY KEY AUTO_INCREMENT, "
+                     "channelId VARCHAR(70), "
+                     "leadingChannelId VARCHAR(70), "
+                     "status VARCHAR(10))")
+                     
+
+mycursor.execute('CREATE TABLE youtube_video_categories (id INT, category_name VARCHAR(70), category_description VARCHAR(100))')
+                     
+values = [('1', 'Фильмы и анимация', 'Новые трейлеры фильмов, видео про фильмы, сцены и музыка '
+                                     'из фильмов/мультсериалов, мультфильмы.'),
+          ('2', 'Автомобили', 'Все видео об автомобилях, моотциклах, транспорте, авто выставках и так далее.'),
+          ('10', 'Музыка', 'Песни, видеоклиипы, ролики музыкантов.'),
+          ('15', 'Животные', 'Смешные и интересные видео о животных и домашних питомцах.'),
+          ('17', 'Спорт', 'Видео про спортивные события, тренировки и спортсменов.'),
+          ('19', 'Путешествия и события', 'Места для путешествий, рассказы о путешествиях, блоги из других стран.'),
+          ('20', 'Игры', 'Летсплеи, прохождения, обзоры игр и событий на игровом рынке, киберспорт и тому подобное.'),
+          ('22', 'Люди и блоги', 'Видео о людях, из блоги, лайфстайл, обзоры, реклама и прочее.'),
+          ('23', 'Комедия', 'Комедийные сериалы, стенд-апы, шоу, мультфильмы и выступления.'),
+          ('24', 'Развлечения', 'Развлекательные видео, для которых сложно уточнить категорию.'),
+          ('25', 'Новости и политика', 'Видео, согласно названию, на темы новостей и политики.'),
+          ('26', 'Стиль', 'Howto&Style - категория в которой собраны видео о стиле, моде, лайфхакам и так далее.'),
+          ('27', 'Образование', 'Категория "обраазование" включает в себя обучающие видео, '
+                                'которые не подходят под иные категории.'),
+          ('28', 'Наука и технологии', 'Видео о науке и ехнологиях попадают в эту категорию.'),
+          ('29', 'Иные активности', 'Иные активности (Nonprofits & Activism) - видео, которые не подходят под '
+                                    'иные категории.')]
+for i in values:
+    mycursor.execute('INSERT INTO youtube_video_categories (id, category_name, category_description) VALUES (%s, %s, %s)', i)
+'''
+'''
+id, video_id, published_at, title, description, image_url, category_id, default_language, duration, dimension,
+definition(hd, sd), caption(True, False), licensed_content(True, False), projection(360, rectangular), privacyStatus,
+embeddable, view_count, like_count, dislike_count, favorite_count, comment_count, topic_categories
+mycursor.execute('CREATE TABLE videos ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'channel_id VARCHAR(70), '
+                 "video_id VARCHAR(70), "
+                 "published_at DATETIME, "
+                 "title VARCHAR(200), "
+                 "description VARCHAR(5000), "
+                 "image_url VARCHAR(100), "
+                 "live_broadcast VARCHAR(10), "
+                 "category_id VARCHAR(50), "
+                 "default_language VARCHAR(10), "
+                 "duration VARCHAR(10), "
+                 "dimension VARCHAR(10), "
+                 "definition VARCHAR(3), "
+                 "caption BOOL, "
+                 "licensed_content BOOL, "
+                 "projection VARCHAR(11), "
+                 "privacy_status VARCHAR(10), "
+                 "embeddable BOOL, "
+                 "view_count INT, "
+                 "like_count INT, "
+                 "dislike_count INT, "
+                 "favorite_count INT, "
+                 "comment_count INT, "
+                 "topic_categories VARCHAR(70)"
+                 ")")
+
+
+ДЛЯ ОТЛАДКИ
+mycursor.execute('DELETE FROM channels')
+mycursor.execute('DELETE FROM channelsToGo')
+mycursor.execute('DELETE FROM videos_ids')
+mycursor.execute('DELETE FROM videos')
+mycursor.execute("SELECT id FROM videos")
+res = mycursor.fetchall()
+for i in res:
+    print(i)
+    
+    
+mycursor.execute('DROP TABLE comments')
+mycursor.execute("CREATE TABLE comments ("
+                 "id INT PRIMARY KEY AUTO_INCREMENT, "
+                 "video_id VARCHAR(70), "
+                 "text BLOB, "
+                 "comment_like_count INT, "
+                 "comment_publish_date DATETIME)")
+
+mycursor.execute("SELECT title, description FROM videos WHERE channel_id = 'UCSF6ewY9LS8GnbphwvnZpUg'")
+fetch_title_description = mycursor.fetchall()
+for i in fetch_title_description:
+    print(i)
+mycursor.execute("SELECT title, channelId FROM channels")
+r = mycursor.fetchall()
+for i in r:
+    print(i)
