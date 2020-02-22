@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="100d3a81-6ac5-476e-bf2a-46b0da3f45d6" name="Default Changelist" comment="" />
+    <list default="true" id="100d3a81-6ac5-476e-bf2a-46b0da3f45d6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,12 +14,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1YAtzFE8U0fAULa1iRkBasyqZ5h" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -71,13 +78,34 @@
       <option name="presentableId" value="Default" />
       <updated>1582397486562</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add new line">
+      <created>1582397673774</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1582397673774</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added files">
+      <created>1582397754417</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1582397754417</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Add new line" />
+    <MESSAGE value="Added files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added files" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="347" y="0" key="CommitChangelistDialog2" timestamp="1582397672506">
+    <state x="347" y="0" key="CommitChangelistDialog2" timestamp="1582397751747">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="347" y="0" key="CommitChangelistDialog2/0.0.1360.728@0.0.1360.728" timestamp="1582397672506" />
+    <state x="347" y="0" key="CommitChangelistDialog2/0.0.1360.728@0.0.1360.728" timestamp="1582397751747" />
     <state width="1339" height="159" key="GridCell.Tab.0.bottom" timestamp="1582397539594">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
@@ -98,5 +126,9 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="183" y="10" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1582397515236" />
+    <state x="272" y="101" key="Vcs.Push.Dialog.v2" timestamp="1582397784564">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="272" y="101" key="Vcs.Push.Dialog.v2/0.0.1360.728@0.0.1360.728" timestamp="1582397784564" />
   </component>
 </project>
