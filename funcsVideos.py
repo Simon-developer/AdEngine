@@ -19,7 +19,7 @@ yt = YouTubeDataAPI(googleApiKey)
 
 
 def fetch_all_comments_from_video_by_id(video_id: str):
-    comments = yt.get_video_comments(video_id=video_id, get_replies=False, max_results=None)
+    comments = yt.get_video_comments(video_id=video_id, get_replies=False)
     counter = 0
     for i in comments:
         text = i['text']

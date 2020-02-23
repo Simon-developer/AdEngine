@@ -2,6 +2,7 @@ import mysql.connector
 import datetime
 import vk
 import funcsCommon
+import interface
 from config import *
 from funcsVideos import *
 from funcs_analysis import *
@@ -41,8 +42,20 @@ else:
 
 
 urlStack = ["https://www.youtube.com/channel/UCharT5kGpXaM98TAaenWndg"]
-i = str(input('\nВведите вдрес канала после http://youtube.com/: '))
-i = "https://www.youtube.com/"+i
+i = str(input('\nЧтобы удалить канал, после его адреса напишите delete ("channel/rgkjHRFjcnF delete").'
+              '\nЧтобы посмотреть информацию в базе, введите db или database.'
+              '\nЧтобы добавить канал введите вдрес после http://youtube.com/: '))
+
+#Запуск функции интерфейса
+if i == "db" or i == "database":
+    interface.interface()
+#Проверка, нужно ли удалять канал
+i = i.split()
+to_delete = False
+if len(i) > 1:
+    to_delete = True
+#Добавление канала
+i = "https://www.youtube.com/"+i[0]
 urlStack = [i]
 
 for channelURL in urlStack:
@@ -69,6 +82,12 @@ for channelURL in urlStack:
     else:
         print(channelURL)
     channelId = data['items'][0]['id']
+
+    #Удаление канала, если было выбрано пользователем
+    if to_delete:
+        funcsCommon.delete_channel_all(channelId)
+        continue
+
     title = data["items"][0]["snippet"]["title"]
     print("Пытаюсь добавить - ", title)
 
@@ -293,8 +312,3 @@ for channelURL in urlStack:
         print("Ошибка, невозможно продолжать действие программы!")
         raise SystemExit
 
-
-
-#mycursor.execute("SELECT * FROM channels")
-#for i in mycursor:
-#    print(i)
