@@ -1,11 +1,14 @@
 import mysql.connector
 import re
 import json
-from config import *
 import funcsCommon
+import numpy as np
+from config import *
 from youtube_api import YouTubeDataAPI
 from datetime import datetime, timedelta
-import time
+from tensorflow.keras.models import load_model
+from nltk.tokenize import TweetTokenizer
+from nltk.stem.snowball import RussianStemmer
 
 mydb = mysql.connector.connect(
     host=host,
@@ -17,22 +20,86 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 yt = YouTubeDataAPI(googleApiKey)
 
+'''
+Константы и объекты для предсказаний по модели
+Суть - предсказание тональной направленности комментариев
+'''
+vocab_size = 5000
+vocab = []
+token_to_idx = []
+tokenizer = TweetTokenizer()
+stemmer = RussianStemmer()
+regex = re.compile('[^а-яА-Я ]')
+stem_cache = {}
+model = load_model("model/model.h5")
 
+''' Загрузка словаря стем, на котором была обучена модель '''
+with open('model/vocab.json') as json_file:
+    data = json.load(json_file)
+    for stem in data:
+        vocab.append(stem)
+#Загрузка словаря в переменную
+token_to_idx = {vocab[i] : i for i in range(vocab_size)}
+#Получение из слова стемы
+def get_stem(token):
+    stem = stem_cache.get(token, None)
+    if stem:
+        return stem
+    token = regex.sub('', token).lower()
+    stem = stemmer.stem(token)
+    stem_cache[token] = stem
+    return stem
+
+#Функция преобразования комментария в вектор размерностью 5000 стем, для предсказаний по модели
+def tweet_to_vector(tweet, show_unknowns=False):
+    vector = np.zeros(vocab_size, dtype=np.int_)
+    for token in tokenizer.tokenize(tweet):
+        stem = get_stem(token)
+        idx = token_to_idx.get(stem, None)
+        if idx is not None:
+            vector[idx] = 1
+        elif show_unknowns:
+            print("Неизвестное слово: ", token)
+    return vector
+
+'''
+Сбор всех комментариев по id видео, вызывается из функции сбора информации о видео
+Вход - id видео
+Выход - количество добавленных комментариев
+'''
 def fetch_all_comments_from_video_by_id(video_id: str):
-    comments = yt.get_video_comments(video_id=video_id, get_replies=False)
+    comments = yt.get_video_comments(video_id=video_id,
+                                     get_replies=False,
+                                     max_results=100,
+                                     next_page_token=False,
+                                     part=['snippet'])
     counter = 0
+    sentiment = 0
+
     for i in comments:
+        comment_author = i['commenter_channel_id']
         text = i['text']
+
+        #Определение тональности комментария
+        #Преобразуем комментарий в векторное представление
+        processed_comment = tweet_to_vector(text)
+        #Изменяем размерность вектора чтобы поместился в модель
+        processed_comment = processed_comment.reshape(1, 5000)
+        #Предсказание
+        prediction = model.predict(processed_comment)
+        sentiment = float(prediction[0][0])
+
         comment_like_count = int(i['comment_like_count'])
         comment_publish_date = i['comment_publish_date']
         comment_publish_date = funcsCommon.dateToFormat(str(comment_publish_date))
-        values = (video_id, text, comment_like_count, comment_publish_date)
-        mycursor.execute('INSERT INTO comments (video_id, text, comment_like_count, comment_publish_date) '
-                             'VALUES (%s, %s, %s, %s)', values)
+
+        values = (video_id, comment_author, text, sentiment, comment_like_count, comment_publish_date)
+        mycursor.execute('INSERT INTO comments (video_id, comment_author, text, sentiment, comment_like_count, comment_publish_date) '
+                             'VALUES (%s, %s, %s, %s, %s, %s)', values)
         mydb.commit()
         counter += 1
-    print("Добавлено: ", counter, " комментариев", sep="")
 
+    return counter
 
 def get_all_info_from_videos(channel_id: str):
     query = "SELECT video_id FROM videos_ids WHERE channel_id = %s"
@@ -186,11 +253,11 @@ def collect_video_info(video_id: str):
         dislike_count = video['statistics']['dislikeCount']
     else:
         dislike_count = 0
-    if video['statistics']['favoriteCount']:
+    if 'favoriteCount' in video['statistics']:
         favorite_count = video['statistics']['favoriteCount']
     else:
         favorite_count = 0
-    if 'commentCount' in video['statistics']['commentCount']:
+    if 'commentCount' in video['statistics']:
         comment_count = video['statistics']['commentCount']
     else:
         comment_count = 0
@@ -215,7 +282,7 @@ def collect_video_info(video_id: str):
     try:
         mycursor.execute(query, values)
         mydb.commit()
-        print("Видео (", title, ") добавлено!", sep="")
+        print("-->Видео (", title, ") добавлено!", sep="")
         return True
     except mysql.connector.Error as err:
         print(err)

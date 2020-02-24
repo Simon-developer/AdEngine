@@ -1,6 +1,7 @@
 import mysql.connector
 from config import *
 from funcsCommon import hasCyrillic, returnId
+from funcs_analysis import first_channel_analysis
 try:
     mydb = mysql.connector.connect(
         host=host,
@@ -18,31 +19,23 @@ except:
 def interface():
     if_continue = True
     while if_continue:
-        print("--------------------------------------\nКанал/Видео/ГруппаВК? (c/v/g): ")
-        what_to_search = input()
+        what_to_search = input("--------------------------------------\nКанал/Видео/ГруппаВК? (c/v/g): ")
         if what_to_search == "c":
-            print("Пожалуйста, введите название или адрес канала после 'tube.com/': ")
-            channel_name = input()
-            if hasCyrillic(channel_name):
-                sql = "SELECT * FROM channels WHERE title = %s"
-                value = (channel_name,)
-            else:
-                sql = "SELECT * FROM channels WHERE id = %s"
-                value = (returnId(channel_name), )
-
+            channel_name = input("Пожалуйста, введите название или адрес канала после 'tube.com/': ")
+            sql = "SELECT channelId FROM channels WHERE title = %s OR title = %s OR channelId = %s"
+            value = (channel_name, returnId(channel_name),returnId(channel_name))
             search_for_channel = mycursor.execute(sql, value)
             search_result = mycursor.fetchall()
             if len(search_result) == 0:
                 print("Каналов не найдено!\nПродолжить (n/y)?")
                 check = input()
                 if check == "n":
-                    quit()
+                    return 'quit'
                 else:
                     continue
             for channel in search_result:
-                print('Канал ', channel_name, " найден.")
-                print('Кол-во подписчиков - ', channel[17], ".")
-                print('Дата создания ', channel[10], ".")
+                first_channel_analysis(channel[0])
+
         elif what_to_search == "v":
             print("Пожалуйста, введите название видео: ")
             video_name = input()
@@ -54,5 +47,7 @@ def interface():
             check = input()
 
             if check == "n":
-                quit()
+                return 'quit'
+            else:
+                continue
 

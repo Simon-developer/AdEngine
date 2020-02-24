@@ -9,7 +9,6 @@ import time
 import sys
 import mysql.connector
 
-
 mydb = mysql.connector.connect(
     host=host,
     user=user,
@@ -21,7 +20,7 @@ mycursor = mydb.cursor()
 
 
 def update_progress(progress):
-    barLength = 20 # Modify this to change the length of the progress bar
+    barLength = 20  # Modify this to change the length of the progress bar
     status = ""
     if isinstance(progress, int):
         progress = float(progress)
@@ -34,8 +33,8 @@ def update_progress(progress):
     if progress >= 1:
         progress = 1
         status = "Готово...\r\n"
-    block = int(round(barLength*progress))
-    text = "\r---Прогресс: [{0}] {1}% {2}".format("$"*block + "-"*(barLength-block), progress*100, status)
+    block = int(round(barLength * progress))
+    text = "\r---Прогресс: [{0}] {1}% {2}".format("$" * block + "-" * (barLength - block), progress * 100, status)
     sys.stdout.write(text)
     sys.stdout.flush()
 
@@ -70,15 +69,17 @@ def returnYTApiUrl(url: str, type: str):
         return url
 
 
-
 def returnId(url: str):
     return url.rsplit('/', 1)[-1]
 
 
 def ytChannelStatsGet(url: str):
-    jsonUrl = urllib.request.urlopen(url)
-    data = json.loads(jsonUrl.read())
-    return data
+    try:
+        jsonUrl = urllib.request.urlopen(url)
+        data = json.loads(jsonUrl.read())
+        return data
+    except:
+        return "ERROR"
 
 
 def dateToFormat(date: str):
@@ -87,7 +88,7 @@ def dateToFormat(date: str):
     return date
 
 
-def duration_decoder(d:str):
+def duration_decoder(d: str):
     '''
     Функуия учитывает только часы, минуты и секунды, видео длинной в дни учиттываться не будут
     :param d: длительность в формате ИСО 8601
@@ -112,7 +113,6 @@ def duration_decoder(d:str):
         sec = 0
     total_duration_seconds: Int = int(sec) + int(min) * 60 + int(hours) * 60 * 60
     return total_duration_seconds
-
 
 
 def hasCyrillic(text: str):
@@ -201,13 +201,14 @@ def sortFoundDomains(foundDomains: dict):
                 try:
                     res = vkApi.users.get(user_ids=urlId, v=vkApiVersion)
                     res = vkApi.users.getFollowers(user_id=res[0]['id'], v=vkApiVersion)
-                    print("------Количество подписчиков на странице (https://vk.com/", urlId, ") - ", res['count'], sep="")
+                    print("------Количество подписчиков на странице (https://vk.com/", urlId, ") - ", res['count'],
+                          sep="")
                     links[urlId] = res['count']
                 except:
                     print('------Ссылка на ВК не является ни группой, ни профилем -', urlId)
     if len(links) > 0:
         listDict = list(links.items())
-        listDict.sort(key=lambda i : i[1])
+        listDict.sort(key=lambda i: i[1])
         targetVkGroup = "https://vk.com/" + listDict[-1][0]
         foundDomains['vkGroups'] = targetVkGroup
         if targetVkGroup in foundDomains['vkElse']:
@@ -242,6 +243,15 @@ def delete_channel_all(channel_id: str):
         print("Videos_ids - Не получилось удалить видео из списка видео!")
         raise SystemError
     try:
+        query = "SELECT * FROM videos WHERE channel_id = %s"
+        mycursor.execute(query, value)
+        videos = mycursor.fetchall()
+        dropped_videos_counter = 0
+        for video in videos:
+            video_id = (video[2],)
+            query = "DELETE FROM comments WHERE video_id = %s"
+            mycursor.execute(query, video_id)
+            mydb.commit()
         query = "DELETE FROM videos WHERE channel_id = %s"
         mycursor.execute(query, value)
         mydb.commit()
@@ -249,6 +259,7 @@ def delete_channel_all(channel_id: str):
     except:
         print("Videos - Не получилось удалить видео!")
         raise SystemError
+
 
 # Для отладки
 # Для отладки
@@ -261,4 +272,4 @@ def delete_fcking_all():
     mydb.commit()
     mycursor.execute('DELETE FROM videos')
     mydb.commit()
-#delete_fcking_all()
+# delete_fcking_all()

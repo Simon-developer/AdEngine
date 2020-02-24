@@ -51,7 +51,7 @@ print('Всего найдено стем: ', len(stem_count))
 vocab = sorted(stem_count, key=stem_count.get, reverse=True)[:vocab_size]
 print(vocab[:200])
 
-with open("model/vocab.json", "w", encoding="utf-8") as file:
+with open("vocab.json", "w", encoding="utf-8") as file:
     json.dump(vocab, file)
 
 # Поиск стем по популярности от 0 до 4999
@@ -65,7 +65,7 @@ print(vocab[idx], " - ", stem_count.get(vocab[idx]))
 token_to_idx = {vocab[i] : i for i in range(vocab_size)}
 print(len(token_to_idx))
 
-with open("model/token_to_idx.json", "w", encoding="utf-8") as file:
+with open("token_to_idx.json", "w", encoding="utf-8") as file:
     json.dump(token_to_idx, file)
 
 def tweet_to_vector(tweet, show_unknowns=False):
@@ -82,6 +82,6 @@ def tweet_to_vector(tweet, show_unknowns=False):
 x = tweet_to_vector("Коллеги сидят рубятся в Urban terror, а я из-за долбанной винды не могу :(")
 print(x)
 x = x.reshape(1, 5000)
-model = load_model('model/model.h5')
+model = load_model('model.h5')
 r = model.predict(x)
 print("result - ", r)

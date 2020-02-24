@@ -41,27 +41,37 @@ else:
     raise SystemExit
 
 
-urlStack = ["https://www.youtube.com/channel/UCharT5kGpXaM98TAaenWndg"]
-i = str(input('\nЧтобы удалить канал, после его адреса напишите delete ("channel/rgkjHRFjcnF delete").'
-              '\nЧтобы посмотреть информацию в базе, введите db или database.'
-              '\nЧтобы добавить канал введите вдрес после http://youtube.com/: '))
+if_continue = True
+while if_continue:
+    i = str(input('\nЧтобы удалить канал, после его адреса напишите delete ("channel/rgkjHRFjcnF delete").'
+                  '\nЧтобы посмотреть информацию в базе, введите db или database.'
+                  '\nЧтобы добавить канал введите вдрес после http://youtube.com/.'
+                  '\nЧтобы выйти введите q или quit: '))
+    if i == 'q' or i == 'quit':
+        print("Всего Доброго!")
+        if_continue = False
+        continue
 
-#Запуск функции интерфейса
-if i == "db" or i == "database":
-    interface.interface()
-#Проверка, нужно ли удалять канал
-i = i.split()
-to_delete = False
-if len(i) > 1:
-    to_delete = True
-#Добавление канала
-i = "https://www.youtube.com/"+i[0]
-urlStack = [i]
+    # Запуск функции интерфейса
+    if i == "db" or i == "database":
+        res = interface.interface()
+        if res == 'quit':
+            continue
+    # Проверка, нужно ли удалять канал
+    i = i.split()
+    to_delete = False
+    if len(i) > 1:
+        to_delete = True
+    # Добавление канала
+    channelURL = "https://www.youtube.com/" + i[0]
 
-for channelURL in urlStack:
     localisationCheck = 0.0
     apiUrl = funcsCommon.returnYTApiUrl(channelURL, "channel")
     data = funcsCommon.ytChannelStatsGet(apiUrl)
+    if data == "ERROR":
+        print("Ошибка! Вы ввели неверные символы!")
+        print("----------------------------------\n")
+        continue
     if data['pageInfo']['totalResults'] == 0:
         data = "wrong"
     if data == "wrong":

@@ -111,11 +111,13 @@ for i in res:
     print(i)
     
     
-mycursor.execute('DROP TABLE comments')
+
 mycursor.execute("CREATE TABLE comments ("
                  "id INT PRIMARY KEY AUTO_INCREMENT, "
                  "video_id VARCHAR(70), "
+                 "comment_author VARCHAR(70), "
                  "text BLOB, "
+                 "sentiment FLOAT, "
                  "comment_like_count INT, "
                  "comment_publish_date DATETIME)")
 
@@ -127,3 +129,4 @@ mycursor.execute("SELECT title, channelId FROM channels")
 r = mycursor.fetchall()
 for i in r:
     print(i)
+    '''
