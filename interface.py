@@ -2,6 +2,7 @@ import mysql.connector
 from config import *
 from funcsCommon import hasCyrillic, returnId
 from funcs_analysis import first_channel_analysis
+
 try:
     mydb = mysql.connector.connect(
         host=host,
@@ -16,14 +17,36 @@ except:
           "\nERROR---------------------------")
     raise SystemExit
 
+
 def interface():
     if_continue = True
     while if_continue:
-        what_to_search = input("--------------------------------------\nКанал/Видео/ГруппаВК? (c/v/g): ")
-        if what_to_search == "c":
+        what_to_search = input("--------------------------------------\n"
+                               "Чтобы Посмотреть все таблицы, введите table\n"
+                               "Чтобы узнать количество записей в таблице, введите название show 'название таблицы'\n"
+                               "Канал/Видео/ГруппаВК? (c/v/g): ")
+        command = what_to_search.split()
+        if command[0] == "show":
+            try:
+                mycursor.execute('DESC {table}'.format(table=command[1]))
+                tables = mycursor.fetchall()
+                print("Столбцов -", len(tables))
+                print("%s, "*len(tables))
+                for table in tables:
+                    print(table[0], end=", ", sep="")
+            except mysql.connector.Error as err:
+                print("ERROR - MYSQL!\n", err)
+                raise SystemExit
+
+        elif what_to_search == "table":
+            mycursor.execute('SHOW TABLES')
+            tables = mycursor.fetchall()
+            for table in tables:
+                print('----',table[0])
+        elif what_to_search == "c":
             channel_name = input("Пожалуйста, введите название или адрес канала после 'tube.com/': ")
             sql = "SELECT channelId FROM channels WHERE title = %s OR title = %s OR channelId = %s"
-            value = (channel_name, returnId(channel_name),returnId(channel_name))
+            value = (channel_name, returnId(channel_name), returnId(channel_name))
             search_for_channel = mycursor.execute(sql, value)
             search_result = mycursor.fetchall()
             if len(search_result) == 0:
@@ -50,4 +73,3 @@ def interface():
                 return 'quit'
             else:
                 continue
-

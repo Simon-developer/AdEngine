@@ -121,6 +121,114 @@ mycursor.execute("CREATE TABLE comments ("
                  "comment_like_count INT, "
                  "comment_publish_date DATETIME)")
 
+
+mycursor.execute('CREATE TABLE vk_users ('
+           0      'id INT PRIMARY KEY AUTO_INCREMENT, '
+           1      'user_id INT, '
+           2      'user_first_name VARCHAR(30), '
+           3      'user_last_name VARCHAR(30), '
+           4      'user_sex TINYINT, '
+           5      'user_nickname VARCHAR(30), '
+           6      'user_maiden_name VARCHAR(30), '
+           7      'user_screen_name VARCHAR(30), '
+           8      'user_birthday DATE, '
+           9      'user_city_id INT, '
+           10      'user_city_name VARCHAR(50), '
+           11     'user_country_id INT, '
+           12      'user_country_name VARCHAR(50), '
+           13      'user_photo_link VARCHAR(100), '
+           14      'user_has_mobile BINARY, '
+           14      'user_can_see_all_posts BINARY, '
+           15      'user_can_see_audio BINARY, '
+           16      'user_can_write_private_message BINARY, '
+           17      'user_can_send_friend_request BINARY, '
+           18      'user_can_post BINARY, '
+           19      'user_site VARCHAR(100), '
+           20      'user_status VARCHAR(250), '
+           21      'user_last_seen_platform TINYINT, '
+           22      'user_verified BIT, '
+           23      'user_followers_count MEDIUMINT UNSIGNED, '
+           24      'user_occupation_type ENUM("work","school","university","none"), '
+           25      'user_occupation_id INT, '
+           26      'user_occupation_name VARCHAR(50), '
+           27      'user_home_town VARCHAR(50), '
+           28      'user_relation TINYINT, '
+           29      'user_personal_political TINYINT, '
+           30      'user_personal_langs VARCHAR(300), '
+           31      'user_personal_religion_id VARCHAR(255), '
+           32      'user_personal_inspired_by VARCHAR(250), '
+           33      'user_personal_people_main TINYINT, '
+           34      'user_personal_life_main TINYINT, '
+           35      'user_personal_smoking TINYINT, '
+           36      'user_personal_alcohol TINYINT, '
+           37      'user_interests VARCHAR(250), '
+           38      'user_music VARCHAR(250), '
+           39      'user_activities VARCHAR(250), '
+           40      'user_movies VARCHAR(250), '
+           41      'user_tv VARCHAR(250), '
+           42      'user_books VARCHAR(250), '
+           43      'user_games VARCHAR(250), '
+           44      'user_about VARCHAR(250), '
+           45      'user_quotes VARCHAR(250),'
+           46      'user_military_unit VARCHAR(30), '
+           47      'user_military_unit_id INT, '
+           48      'user_military_country_id INT, '
+           49      'user_military_from SMALLINT, '
+           50      'user_military_until SMALLINT)')
+
+mycursor.execute('CREATE TABLE vk_users_career ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'user_id INT, '
+                 'user_career_group_id INT, '
+                 'user_career_company VARCHAR(50), '
+                 'user_career_country_id SMALLINT, '
+                 'user_career_city_id SMALLINT, '
+                 'user_career_city_name VARCHAR(50), '
+                 'user_career_from SMALLINT, '
+                 'user_career_until SMALLINT, '
+                 'user_career_position VARCHAR(50))')
+
+mycursor.execute('CREATE TABLE vk_users_universities ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'user_id INT, '
+                 'user_university_id INT, '
+                 'user_university_name VARCHAR(50), '
+                 'user_university_country_id INT, '
+                 'user_university_city_id INT, '
+                 'user_university_faculty INT, '
+                 'user_university_faculty_name VARCHAR(120), '
+                 'user_university_chair INT, '
+                 'user_university_chair_name VARCHAR(120), '
+                 'user_university_graduation SMALLINT, '
+                 'user_university_education_form VARCHAR(20), '
+                 'user_university_education_status VARCHAR(50))')
+mydb.commit()
+
+mycursor.execute('CREATE TABLE vk_users_schools ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'user_id INT, '
+                 'user_school_id INT, '
+                 'user_school_name VARCHAR(50), '
+                 'user_school_country_id SMALLINT, '
+                 'user_school_city_id INT, '
+                 'user_school_year_from SMALLINT, '
+                 'user_school_year_to SMALLINT, '
+                 'user_school_type TINYINT)')
+mydb.commit()
+
+mycursor.execute('CREATE TABLE vk_users_relatives ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'user_id INT, '
+                 'relative_id INT, '
+                 'relative_type ENUM("child", "sibling", "parent", "grandparent", "grandchild"), '
+                 'relative_name VARCHAR(60))')
+
+mycursor.execute('CREATE TABLE vk_page_subs ('
+                 'id INT PRIMARY KEY AUTO_INCREMENT, '
+                 'user_id INT, '
+                 'vk_page VARCHAR(120))')
+mydb.commit()
+
 mycursor.execute("SELECT title, description FROM videos WHERE channel_id = 'UCSF6ewY9LS8GnbphwvnZpUg'")
 fetch_title_description = mycursor.fetchall()
 for i in fetch_title_description:

@@ -77,7 +77,7 @@ def engagement_rate_analysis(channel_id: str, hidden_subscribers: bool):
                      'FROM videos WHERE channel_id = %s', (channel_id,))
     fetched_videos = mycursor.fetchall()
     engagement_rates = []
-    channel_engagement_rate = [0,]
+    channel_engagement_rate = [0, ]
 
     # На случай, если нет видео (Хз, как)
     if len(fetched_videos) == 0:
@@ -94,7 +94,7 @@ def engagement_rate_analysis(channel_id: str, hidden_subscribers: bool):
 
         # Если хоть одно значение равно нулю, то это значение скрыто и калькуляция не может быть проведена
         if like_count == 0 or dislike_count == 0 or view_count == 0:
-            return 0,0,0
+            return 0, 0, 0
 
         # Кодировка оценки, чтобы позитивные и негативные имели влияние,
         # а нейтральные - нет
@@ -140,7 +140,7 @@ def video_frequency(channel_id: str):
     videos_length = []
     for video in fetch_all_videos_date:
         videos_length.append(int(video[1]))
-    average_length = sum(videos_length)/len(videos_length)
+    average_length = sum(videos_length) / len(videos_length)
 
     # Берем даты выхода самого нового и последнего (согласно лимиту, макс. - 20)
     newest_video = fetch_all_videos_date[0][0]
@@ -153,6 +153,11 @@ def video_frequency(channel_id: str):
     period_between_video = (time_between / total_videos).total_seconds()
 
     return period_between_video, average_length
+
+
+def get_vk_group_info(vk_link: str):
+    vk_group = ['Группа', 1234556]
+    return vk_group
 
 
 def first_channel_analysis(channel_id: str):
@@ -175,10 +180,20 @@ def first_channel_analysis(channel_id: str):
     # Возраст канала
     age = int((datetime.date.today() - res[10].date()).total_seconds())
     age_years = int(age / 60 / 60 / 24 / 365)
-    age_months = int(age / 60 / 60 / 24 / 30 - age_years * 12)
-    age_days = int(age / 60 / 60 / 24 - age_months * 30 - age_years * 365)
-    print('Канал активен(приблизительно): ', age_years, " года(лет), ", age_months, " месяцев(а), ", age_days,
-          " дня(ей).", sep="")
+    age_months = int(age % (60 * 60 * 24 * 365) / 60 / 60 / 24 / 30)
+    if age_years == 1:
+        year = "год"
+    elif age_years in range(2, 5):
+        year = "года"
+    else:
+        year = "лет"
+    if age_months == 1:
+        month = "месяц"
+    elif age_months in range(2, 5):
+        month = "месяца"
+    else:
+        month = "месяцев"
+    print('Канал активен(приблизительно):', age_years, year, age_months, month, sep=" ")
     localization_status = res[24]
 
     # Анализ локализации
@@ -196,27 +211,34 @@ def first_channel_analysis(channel_id: str):
 
     # Удаление канала при наборе до 5 баллов
     if localization_status < 5:
-        delete_channel_all(channel_id)
+        print("-->-->-->Внимание! Видео недостаточно локализированы, возможно это канал на иностранном языке!\n"
+              "-->-->-->Анализ может проводится неверно!")
+        delete = input('-->-->-->Удалить? (n/y): ')
+        if delete != 'n':
+            delete_channel_all(channel_id)
+            return False
 
     print("Статус локализации - ", localization_status, sep="")
 
     # Анализ частоты выкладки видео
-    upload_frequency,\
+    upload_frequency, \
     average_video_length = video_frequency(channel_id)
-    print("Частота добавления видео на канал: ", upload_frequency / 60 / 60 / 24, " - дня/ей")
-    print("Средняя продолжительность видео: ", average_video_length/60, " - минут")
+    print("Частота добавления видео на канал: ", format(upload_frequency / 60 / 60 / 24, ",.2f"), " - дня/ей")
+    print("Средняя продолжительность видео: ", format(average_video_length / 60, ",.2f"), " - минут")
 
     # Анализ средней тональной оценки видео согласно комментариям
     average_sentiment_score, \
     maximum_sentiment_score, \
     minimum_sentiment_score = video_sentiment_analysis(channel_id)
-    print('--->(Тональность) Средняя тональность комментариев - ', average_sentiment_score)
-    print('--->(Тональность) Лучшая оценка видео: ', maximum_sentiment_score[2])
+    print('------------------------------------------------------')
+    print('--->(Тональность) Средняя тональность комментариев - ', format(average_sentiment_score, ".3f"))
+    print('--->(Тональность) Лучшая оценка видео: ', format(maximum_sentiment_score[2], ".3f"))
     print('------>Для видео: "', maximum_sentiment_score[0], '"')
     print('------>Ссылка: https://www.youtube.com/watch?v=', maximum_sentiment_score[1], sep="")
-    print('--->(Тональность) Худшая оценка видео: ', minimum_sentiment_score[2])
+    print('--->(Тональность) Худшая оценка видео: ', format(minimum_sentiment_score[2], ".3f"))
     print('------>Для видео: "', minimum_sentiment_score[0], '"')
     print('------>Ссылка: https://www.youtube.com/watch?v=', minimum_sentiment_score[1], sep="")
+    print('------------------------------------------------------')
 
     # Анализ вовлеченности
     hidden_subscribers = res[18]
@@ -230,12 +252,25 @@ def first_channel_analysis(channel_id: str):
         mycursor.execute('UPDATE channels SET rating="hidden" WHERE channelId=%s', (channel_id,))
         mydb.commit()
         return
-    print('--->(ER - Индекс вовлеченности) ER всего канала - ', channel_engagement_rate)
-    print('--->(ER - Индекс вовлеченности) Лучший ER видео: ', max_engagement_rate[2])
+
+    print('------------------------------------------------------')
+    print('--->(ER - Индекс вовлеченности) ER всего канала - ', format(channel_engagement_rate, ".3f"))
+    print('--->(ER - Индекс вовлеченности) Лучший ER видео: ', format(max_engagement_rate[2], ".3f"))
     print('------>Для видео: "', max_engagement_rate[0], '"')
     print('------>Ссылка: https://www.youtube.com/watch?v=', max_engagement_rate[1], sep="")
-    print('--->(ER - Индекс вовлеченности) Худший ER видео: ', min_engagement_rate[2])
+    print('--->(ER - Индекс вовлеченности) Худший ER видео: ', format(min_engagement_rate[2], ".3f"))
     print('------>Для видео: "', min_engagement_rate[0], '"')
     print('------>Ссылка: https://www.youtube.com/watch?v=', min_engagement_rate[1], sep="")
+    print('------------------------------------------------------')
 
     # Анализ аудитории по страницам ВКонтача нах
+    print('------------------------------------------------------')
+    related_vk_group = res[5]
+    if len(related_vk_group) == 0:
+        print("--->Связанная с каналом группа ВК отсутствует!")
+    else:
+        print(related_vk_group)
+        vk_group = get_vk_group_info(related_vk_group)
+        print('Название группы: ', vk_group[0])
+        print('Количество подписчиков: ', vk_group[1])
+    print('------------------------------------------------------')

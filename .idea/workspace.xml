@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="100d3a81-6ac5-476e-bf2a-46b0da3f45d6" name="Default Changelist" comment="Added:&#10;Video Duration analysis&#10;Upload Frequency analysis&#10;Comments Sentiment analysis">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Sam.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    <list default="true" id="100d3a81-6ac5-476e-bf2a-46b0da3f45d6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/testtest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testtesttest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sam.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Sam.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AddChannels" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_DUMP" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL_DUMP" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_DUMP" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/To_do_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/To_do_list.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/check.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment_collect.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/final_fucking_try.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/final_fucking_try.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcsCommon.py" beforeDir="false" afterPath="$PROJECT_DIR$/funcsCommon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcsVideos.py" beforeDir="false" afterPath="$PROJECT_DIR$/funcsVideos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcs_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/funcs_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neiro_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/videoParser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/check.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/testtest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,28 +49,7 @@
       <recent name="C:\Users\Sam\PycharmProjects\AdEngine2\model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
-    <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AdEngine2" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hello.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.testtesttest">
     <configuration name="index" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AdEngine2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,27 +63,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/index.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="interface" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AdEngine2" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interface.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,13 +113,55 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testtest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AdEngine2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testtest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="testtesttest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AdEngine2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testtesttest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.index" />
+        <item itemvalue="Python.testtesttest" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.testtest" />
         <item itemvalue="Python.testfile" />
-        <item itemvalue="Python.interface" />
-        <item itemvalue="Python.hello" />
+        <item itemvalue="Python.index" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582461204085</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added:&#10;Video Duration analysis&#10;Upload Frequency analysis&#10;Comments Sentiment analysis&#10;Engagement Rate analysis (video/channel)&#10;&#10;Improved interface">
+      <created>1582563678538</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1582563678538</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -229,44 +232,69 @@
     <MESSAGE value="Added files" />
     <MESSAGE value="delete file" />
     <MESSAGE value="Writing interface 10%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Writing interface 10%" />
+    <MESSAGE value="Added:&#10;Video Duration analysis&#10;Upload Frequency analysis&#10;Comments Sentiment analysis&#10;Engagement Rate analysis (video/channel)&#10;&#10;Improved interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;Video Duration analysis&#10;Upload Frequency analysis&#10;Comments Sentiment analysis&#10;Engagement Rate analysis (video/channel)&#10;&#10;Improved interface" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="378" y="0" key="CommitChangelistDialog2" timestamp="1582563641272">
+    <state x="531" y="264" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1582744067931">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="378" y="0" key="CommitChangelistDialog2/0.0.1360.728@0.0.1360.728" timestamp="1582563641272" />
-    <state width="1339" height="291" key="GridCell.Tab.0.bottom" timestamp="1582563388066">
+    <state x="531" y="264" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.0.1360.728@0.0.1360.728" timestamp="1582744067931" />
+    <state x="378" y="0" key="CommitChangelistDialog2" timestamp="1582563677394">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1339" height="291" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1582563388066" />
-    <state width="1339" height="291" key="GridCell.Tab.0.center" timestamp="1582563388065">
+    <state x="378" y="0" key="CommitChangelistDialog2/0.0.1360.728@0.0.1360.728" timestamp="1582563677394" />
+    <state width="1339" height="258" key="GridCell.Tab.0.bottom" timestamp="1583169476800">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1339" height="291" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1582563388065" />
-    <state width="1339" height="291" key="GridCell.Tab.0.left" timestamp="1582563388065">
+    <state width="1339" height="258" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1583169476800" />
+    <state width="1339" height="258" key="GridCell.Tab.0.center" timestamp="1583169476800">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1339" height="291" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1582563388065" />
-    <state width="1339" height="291" key="GridCell.Tab.0.right" timestamp="1582563388066">
+    <state width="1339" height="258" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1583169476800" />
+    <state width="1339" height="258" key="GridCell.Tab.0.left" timestamp="1583169476800">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1339" height="291" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1582563388066" />
+    <state width="1339" height="258" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1583169476800" />
+    <state width="1339" height="258" key="GridCell.Tab.0.right" timestamp="1583169476800">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1339" height="258" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1583169476800" />
+    <state width="1339" height="258" key="GridCell.Tab.1.bottom" timestamp="1583169476714">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1339" height="258" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1583169476714" />
+    <state width="1339" height="258" key="GridCell.Tab.1.center" timestamp="1583169476714">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1339" height="258" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1583169476714" />
+    <state width="1339" height="258" key="GridCell.Tab.1.left" timestamp="1583169476714">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1339" height="258" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1583169476714" />
+    <state width="1339" height="258" key="GridCell.Tab.1.right" timestamp="1583169476714">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1339" height="258" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1583169476714" />
     <state x="183" y="10" key="SettingsEditor" timestamp="1582397515236">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="183" y="10" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1582397515236" />
-    <state x="272" y="101" key="Vcs.Push.Dialog.v2" timestamp="1582461235338">
+    <state x="272" y="101" key="Vcs.Push.Dialog.v2" timestamp="1582563686386">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="272" y="101" key="Vcs.Push.Dialog.v2/0.0.1360.728@0.0.1360.728" timestamp="1582461235338" />
-    <state x="388" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1582555876591">
+    <state x="272" y="101" key="Vcs.Push.Dialog.v2/0.0.1360.728@0.0.1360.728" timestamp="1582563686386" />
+    <state x="388" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1583154445317">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="388" y="193" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1582555876591" />
-    <state x="343" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1582563353309">
+    <state x="388" y="193" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1583154445317" />
+    <state x="0" y="0" width="710" height="728" key="find.popup" timestamp="1582809051595">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="343" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1582563353309" />
+    <state x="0" y="0" width="710" height="728" key="find.popup/0.0.1360.728@0.0.1360.728" timestamp="1582809051595" />
+    <state x="343" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1582751501226">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="343" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1582751501226" />
   </component>
 </project>
