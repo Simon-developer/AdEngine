@@ -111,4 +111,4 @@ history = model.fit(x_train,
                     batch_size=128,
                     validation_split=0.1)
 
-model.save("lastfuckingmodel.h5")
+model.save("model.h5")
