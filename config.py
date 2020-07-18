@@ -1,12 +1,12 @@
 # MySQL DB
 host = "localhost"
 user = "root"
-password = "192837465s"
+password = "*YOUR PASSWORD*"
 database = "AdEngine"
 # YouTube Data API
-googleApiKey = "AIzaSyDEpyxMuNP9JLJKMhXJ45RhjGBJHV_NprI"
+googleApiKey = "API_KEY"
 # VK API
-vkToken="c08929e5c08929e5c08929e53ec0e7e2c0cc089c08929e59e8d57ca719196e95a325e5b"
+vkToken="VK_TOKEN"
 vkApiVersion = 5.103
 
 
